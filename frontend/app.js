@@ -1,13 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
-const formulario = document.getElementById("formulario");
 formulario.addEventListener("submit", function (e) {
     e.preventDefault();
-
     const nombre = document.getElementById("nombre").value;
     const contacto = document.getElementById("contacto").value;
     const mensaje = document.getElementById("mensaje").value;
 
-    fetch("http://localhost:3000/contacto", {
+    fetch("http://localhost:3000/holamundo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -26,4 +23,4 @@ formulario.addEventListener("submit", function (e) {
       console.error("Error:", error);
     });
   });
-});
+
