@@ -13,7 +13,7 @@ app.get('/', (req, res) => {});
 app.post('/contacto', (req, res) => {
     const { nombre, contacto, mensaje } = req.body;
 
-    const sql = 'INSERT INTO contacto (nombre, contacto, mensaje) VALUES (?, ?, ?)';
+    const sql = 'INSERT INTO contacto (nombre, contacto, mensaje) VALUES (?)';
 
     db.query(sql, [nombre, contacto, mensaje], (err, result) => {
         if (err) {
