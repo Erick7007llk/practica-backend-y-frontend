@@ -1,26 +1,23 @@
-formulario.addEventListener("submit", function (e) {
-    e.preventDefault();
+document.getElementById("formcontacto").addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    const nombre = document.getElementById("nombre").value;
-    const contacto = document.getElementById("contacto").value;
-    const mensaje = document.getElementById("mensaje").value;
+  const data = {
+    nombre: document.getElementById("nombre").value,
+    contacto: document.getElementById("contacto").value,
+    mensaje: document.getElementById("mensaje").value
+  };
 
-    fetch("http://localhost:3000/contacto", {
+  try {
+    const res = await fetch("http://localhost:3000/api/contacto", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nombre,
-        contacto,
-        mensaje
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      alert("Datos enviados correctamente");
-      formulario.reset();
-    })
-    .catch(error => console.error("Error:", error));
-  });
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data }) 
+    });
 
+    const respuesta = await res.json(); 
+    alert(respuesta.mensaje);  
+    document.getElementById("formcontacto").reset();
+  } catch (error) {
+    console.log(`Error: ${error}`); 
+  }
+});
